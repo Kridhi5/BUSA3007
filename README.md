@@ -37,6 +37,7 @@ flowchart LR
     E --> F{Hash matches on-chain record?}
     F -->|Yes| G[File verified as authentic]
     F -->|No| H[File integrity compromised]
+```
 The flowchart above shows that the user uploads a file, file is hased using SHA-256, hash and metadata are stored on chain. Any future file can be rehashed and verified against the blockchain record.
 
 ## Development & Limitations
@@ -45,3 +46,7 @@ The flowchart above shows that the user uploads a file, file is hased using SHA-
 * There is no IPFS in the current prototype.
 * Uses predefined private keys instaed of wallet based authentication.
 
+## 🧩 Future Improvements 
+* Integration with IPFS or decentralised storage.
+* Wallet based authentication(Meta Mask).
+* Public blockchain deplopyment. 
