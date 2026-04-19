@@ -61,6 +61,24 @@ The trust based scoring system limits evidence submission to:
    | >= 70         | Auto approval of submission              |
    | >= 30         | Allowed to post                          |
    | < 30          | Blocked from posting                     |
+
+   ### Review Logic
+```mermaid
+   flowchart LR
+    A[Review initiated] --> B[Validate conditions]
+    B --> C[Update reviewer details]
+    C --> D{Approved?}
+    D -->|Yes| E["Set status Approved<br/>Uploader +10"]
+    D -->|No| F["Set status Rejected<br/>Uploader -15"]
+```
+The flowchart above visulises a typical reviewing scenario.
+## Posting Rate Limiting 
+To prevent spam:
+* Users with trust of < 90 - has a max submission of 3 per 24 hours.
+* Users with trust >= 90 - has no limit.
+This is coordinated through:
+* postsInWindow
+* Resets every 24 hours(lastresetTime)
   
 ## Workflow Overview 
 
