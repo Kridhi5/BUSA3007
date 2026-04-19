@@ -31,9 +31,9 @@ The trust based scoring system limits evidence submission to:
 ```mermaid
 flowchart LR
     A[User uploads file] --> B[File hashed using SHA-256]
-    B --> C[Hash & metadata stored on-chain]
+    B --> C[Hash and metadata stored on-chain]
     C --> D[Future file uploaded]
     D --> E[Rehash file]
     E --> F{Hash matches on-chain record?}
     F -->|Yes| G[File verified as authentic]
-    F -->|
+    F -->|No| H[File integrity compromised]
