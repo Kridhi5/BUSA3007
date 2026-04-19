@@ -9,7 +9,7 @@ The files uploaded are the smart contract, application codes and the evidence re
 * Deterministic evidence verification through hash comparision. The file uploaded initially will have a hash and if it needs to be verified, the user has to upload the same file whereby the system will cross check the hash for the both the files.
 
 ## System Architecture 
-There is 3 layers in the web application:
+There are 3 layers in the web application:
 * Smart Contract ( found in the EvidenceRegistery.sol file) enforces system logic and store evidence metadata.
 * Frontend(developed using Streamlit) provides an interface for evidence upload and verfication.
 * Local Blockchain(Hardhat) used for development, testing and deployment.
