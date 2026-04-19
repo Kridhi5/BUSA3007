@@ -20,8 +20,31 @@ Only evidence metadata(case ID, filehash, uploader address, timestamp) is stored
 * verifyEvidence(): verify file authenticity using hash comparison.
 * getEvidence() : retrive stored evidence metadata.
 * Role based user management with authoris/revoke functionaility.
-
-## Trust & Activity Control
+  ### File Structure
+  * id - unique identifier
+  * caseID - links evidence to a case
+  * fileHash - ensures integrity
+  * fileName - original file name
+  * uploader - who submitted
+  * timestamp - upload time
+  * status - Pending/Approved/Rejected
+  * reviewedBY,reviewedAt,reviewNote
+  * exists - prevents invalid access
+## Access Control System 
+1. Owner
+   * full control
+   * can:
+       * Authorise/revoke users
+       * set trust scores
+       * review any evidence
+ 2. Authorised Users
+    * can submit evidence
+    * assigned trust scores
+ 3. Reviewers
+    * Must satisfy the trust scores >= 90 or owner
+    * can review pending evidence
+      
+## Trust Score Logic
 The trust based scoring system limits evidence submission to:
 * prevent abuse and over submission.
 * enforce posting limits based on user.  
@@ -29,7 +52,16 @@ The trust based scoring system limits evidence submission to:
 * users below a minimum threshold are prevented from submitting evidence
 * users within a mid-range threshold are allowed a limited number of submissions
 * users above a higher threshold are allowed unrestricted activity
-
+  ### Trust Score and Impact on Usage
+   A new authorised user gets a score of 50 and it changes depending approval and        rejection. So if the evidence gets approved, thats an addition of 10 points and       minus 15 points is rejected. The maxiumum is 100 and minimum is 0.
+   Below is a table that summarises the trust score:
+   | Score Range   | Impact                                   |
+   | ------------- | -------------------------------------    |
+   | >= 90         | Reviewer priveileges,no posting limits   |
+   | >= 70         | Auto approval of submission              |
+   | >= 30         | Allowed to post                          |
+   | < 30          | Blocked from posting                     |
+  
 ## Workflow Overview 
 
 ```mermaid
