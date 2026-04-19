@@ -43,7 +43,28 @@ Only evidence metadata(case ID, filehash, uploader address, timestamp) is stored
  3. Reviewers
     * Must satisfy the trust scores >= 90 or owner
     * can review pending evidence
-      
+## Evidence Lifecycle
+Each piece of evidence goes through the following stages: 
+```mermaid
+flowchart TD
+    A[Evidence Submission] --> B[Authorized user uploads file]
+    B --> C["Store metadata<br/>Case ID, Hash, Filename, Timestamp"]
+
+    C --> D{Uploader trust score >= 70?}
+    D -->|Yes| E[Auto-approved]
+    D -->|No| F[Pending review]
+
+    F --> G["Reviewed by high-trust user<br/>(>= 90) or Owner"]
+    G --> H{Review decision}
+
+    H -->|Approved| I[Evidence approved]
+    H -->|Rejected| J[Evidence rejected]
+
+    I --> K[Available for verification]
+    J --> K
+
+    K --> L["Any user can verify file<br/>by comparing hashes"]
+```
 ## Trust Score Logic
 The trust based scoring system limits evidence submission to:
 * prevent abuse and over submission.
@@ -53,7 +74,7 @@ The trust based scoring system limits evidence submission to:
 * users within a mid-range threshold are allowed a limited number of submissions
 * users above a higher threshold are allowed unrestricted activity
   ### Trust Score and Impact on Usage
-   A new authorised user gets a score of 50 and it changes depending approval and        rejection. So if the evidence gets approved, thats an addition of 10 points and       minus 15 points is rejected. The maxiumum is 100 and minimum is 0.
+   A new authorised user gets a score of 50 and it changes depending approval and rejection. So if the evidence gets approved, that's      an addition of 10 points and minus 15 points is rejected. The maxiumum is 100 and minimum is 0.
    Below is a table that summarises the trust score:
    | Score Range   | Impact                                   |
    | ------------- | -------------------------------------    |
@@ -72,7 +93,7 @@ The trust based scoring system limits evidence submission to:
     D -->|No| F["Set status Rejected<br/>Uploader -15"]
 ```
 The flowchart above visulises a typical reviewing scenario.
-## Posting Rate Limiting 
+## Posting Rate Limit 
 To prevent spam:
 * Users with trust of < 90 - has a max submission of 3 per 24 hours.
 * Users with trust >= 90 - has no limit.
@@ -92,7 +113,7 @@ flowchart LR
     F -->|Yes| G[File verified as authentic]
     F -->|No| H[File integrity compromised]
 ```
-The flowchart above shows that the user uploads a file, file is hased using SHA-256, hash and metadata are stored on chain. Any future file can be rehashed and verified against the blockchain record.
+The flowchart above shows that the user uploads a file, file is hased using SHA-256, hash and metadata are stored on chain. Any future file can be rehashed and verified against the blockchain record.The contract provides read - only access. 
 
 ## Development & Limitations
 * The system runs on a local Hardhat blockchain.
