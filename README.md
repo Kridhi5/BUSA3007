@@ -1,4 +1,4 @@
-# BUSA3007
+# Evidence Management System 
 Blockchain Group Assignment 
 The files uploaded are the smart contract, application codes and the evidence registery where all the files uploaded to the blockchain will stored. It stores the cyptographic file hashes on chain by avoidng the dependence on centralised storage and preventing post submission tampering. 
 
