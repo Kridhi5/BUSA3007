@@ -15,7 +15,7 @@ There is 3 layers in the web application:
 * Local Blockchain(Hardhat) used for development, testing and deployment.
 Only evidence metadata(case ID, filehash, uploader address, timestamp) is stored in the system, while the actual files are processed off chain to maintain scalability.
 
-## Smart Contrcat Capabilities 
+## Smart Contract Capabilities 
 * submitEvidence(): submit hashed evidence which is only for authorised users only.
 * verifyEvidence(): verify file authenticity using hash comparison.
 * getEvidence() : retrive stored evidence metadata.
@@ -24,7 +24,11 @@ Only evidence metadata(case ID, filehash, uploader address, timestamp) is stored
 ## Trust & Activity Control
 The trust based scoring system limits evidence submission to:
 * prevent abuse and over submission.
-* enforce posting limits based on user. So a user can only submit three files in every 24 hours regardless of the user status in the system.
+* enforce posting limits based on user.  
+  ### Below is the logic for the canPost() :
+* users below a minimum threshold are prevented from submitting evidence
+* users within a mid-range threshold are allowed a limited number of submissions
+* users above a higher threshold are allowed unrestricted activity
 
 ## Workflow Overview 
 
