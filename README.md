@@ -35,5 +35,5 @@ flowchart LR
     C --> D[Future file uploaded]
     D --> E[Rehash file]
     E --> F{Hash matches on-chain record?}
-    F -->|Yes| G[File verified as authentic ✅]
+    F -->|Yes| G[File verified as authentic]
     F -->|
